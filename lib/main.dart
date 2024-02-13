@@ -8,10 +8,12 @@ import 'pages/home_page.dart';
 
  main()  async {
    ///=======
-   Get.put(HomeController());
+
+   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+   Get.put(HomeController());
   runApp(const MyApp());
 }
 

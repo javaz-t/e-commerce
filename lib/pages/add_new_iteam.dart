@@ -1,6 +1,7 @@
 import 'package:e_commerse/controller/home_controller.dart';
 import 'package:e_commerse/widget/droup_down.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 class AddNewdata extends StatelessWidget {
@@ -22,6 +23,7 @@ class AddNewdata extends StatelessWidget {
                     fontWeight: FontWeight.bold),),
                 SizedBox(height: 10,),
                 TextField(
+                  controller: ctr.nameController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20)),
@@ -34,6 +36,7 @@ class AddNewdata extends StatelessWidget {
                 ),
                 SizedBox(height: 10,),
                 TextField(
+                  controller: ctr.descriptionController,
                   maxLines: 5,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -48,6 +51,20 @@ class AddNewdata extends StatelessWidget {
                 ),
                 SizedBox(height: 10,),
                 TextField(
+                  controller: ctr.priceController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                    ),
+                    labelText: 'Price',
+                  ),
+                ),
+                SizedBox(height: 10,),
+                TextField(
+                  controller: ctr.imgUrlController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20)),
@@ -63,15 +80,19 @@ class AddNewdata extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
                   children: [
-                    DroupDown(title: 'Catergory ',
+                    DroupDown(title:ctr.catergory,
                       iteams: ['one', 'tewo', 'three'],
                       onSelected: (selectedValue) {
-                        print(selectedValue);
-                      },),
-                    DroupDown(title: 'Brand ',
+                      ctr.catergory=selectedValue;
+                      ctr.update();
+                      },
+                    ),
+                    DroupDown(title:ctr.brand,
                       iteams: ['one', 'tewo', 'three'],
                       onSelected: (selectedValue) {
-                        print(selectedValue);
+                      ctr.brand=selectedValue;
+                      ctr.update();
+
                       },)
 
                   ],
@@ -79,13 +100,17 @@ class AddNewdata extends StatelessWidget {
                 SizedBox(height: 10,),
                 Text('Offer ?', style: TextStyle(fontSize: 20),),
                 SizedBox(height: 10,),
-                DroupDown(title: ' ',
-                  iteams: ['YES', 'NO'],
+                DroupDown(title:ctr.offer.toString(),
+                  iteams: ['true', 'false'],
                   onSelected: (selectedValue) {
-                    print(selectedValue);
+                    ctr.offer=bool.tryParse(selectedValue ?? "false")?? false;
+                    ctr.update();
                   },),
                 SizedBox(height: 10,),
-                ElevatedButton(onPressed: () {}, child: Text('ADD PRODUCT')),
+                ElevatedButton(onPressed: () {
+                  ctr.addProduct();
+
+                }, child: Text('ADD PRODUCT')),
 
 
               ],

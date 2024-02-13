@@ -15,7 +15,7 @@ class DroupDown  extends StatelessWidget {
         child: DropdownButton2<String>(
           isExpanded: true,
           hint: Text(
-            title,
+              selectedValue ?? title,
             style: TextStyle(
               fontSize: 14,
               color: Theme.of(context).hintColor,
